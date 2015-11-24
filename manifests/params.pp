@@ -1,6 +1,6 @@
 # == Class: galaxy::params
 #
-# Default parameters for the galaxy puppet package to use
+# Default parameters for the galaxy puppet module to use
 #
 # === Parameters
 #
@@ -26,10 +26,14 @@
 #
 # Copyright 2014, unless otherwise noted.
 #
-class galaxy::params {
-  $galaxy_branch = 'stable'
-  $galaxy_repository = 'https://bitbucket.org/galaxy/galaxy-dist/'
-  $create_user   = true
-  $app_directory = '/home/galaxy/galaxy-dist'
-  $home_direcory = '/home/galaxy'
+class galaxy::params (
+  $app_directory     = "${galaxy_homedir}/galaxy-dist",
+  $create_user       = false,
+  $directory         = undef,
+  $galaxy_branch     = 'stable',
+  $galaxy_group      = 'galaxy',
+  $galaxy_homedir    = undef,
+  $galaxy_repository = 'https://bitbucket.org/galaxy/galaxy-dist/',
+  $galaxy_user       = 'galaxy',
+){
 }

@@ -1,41 +1,39 @@
+# Class: galaxy::directories
+# inherits galaxy::params, where we set a number of paths needed here.
 #
-#
-#
-#
-#
-#
-class galaxy::directories(
-  $tmp_file            = '/home/galaxy/galaxy-dist/database/tmp',
-  $file_path           = '/home/galaxy/galaxy-dist/database/files',
-  $cluster_files       = '/home/galaxy/galaxy-dist/database/pbs',
-  $job_working         = '/home/galaxy/galaxy-dist/database/job_working_directory',
-  $whoosh_index        = '/home/galaxy/galaxy-dist/database/whoosh_indexes',
-  $ftp                 = '/home/galaxy/galaxy-dist/database/ftp/',
-  $compiled_templates  = '/home/galaxy/galaxy-dist/database/compiled_templates',
-  $object_store_object = '/home/galaxy/galaxy-dist/database/object_store_object',
-  $object_store_cache  = '/home/galaxy/galaxy-dist/database/object_store_cache',
-  $tool_dependency     = '/home/galaxy/galaxy-dist/tool_dependencies',
-  $tool_data_jars      = '/home/galaxy/galaxy-dist/tool-data/shared/jars',
-){
+class galaxy::directories (
+  $cluster_files       = "${app_dir}/database/pbs",
+  $compiled_templates  = "${app_dir}/database/compiled_templates",
+  $file_path           = "${app_dir}/database/files",
+  $ftp                 = "${app_dir}/database/ftp/",
+  $genetrack_plots     = "${app_dir}/static/genetrack/plots",
+  $job_working         = "${app_dir}/database/job_working_directory",
+  $object_store_cache  = "${app_dir}/database/object_store_cache",
+  $object_store_object = "${app_dir}/database/object_store_object",
+  $tmp_file            = "${app_dir}/database/tmp",
+  $tool_data_jars      = "${app_dir}/tool-data/shared/jars",
+  $tool_dependency     = "${app_dir}/tool_dependencies",
+  $whoosh_index        = "${app_dir}/database/whoosh_indexes",
+  ) inherits galaxy::params {
   $paths= [
-    "$tmp_file",
-    "$file_path",
-    "$cluster_files",
-    "$job_working",
-    "$whoosh_index",
-    "$ftp",
-    "$compiled_templates",
-    "$object_store_object",
-    "$object_store_cache",
-    "$tool_dependency",
-    "$tool_data_jars",
-    '/home/galaxy/galaxy-dist/static/genetrack/plots',
+    $cluster_files,
+    $compiled_templates,
+    $file_path,
+    $ftp,
+    $genetrack_plots
+    $job_working,
+    $object_store_cache,
+    $object_store_object,
+    $tmp_file,
+    $tool_data_jars,
+    $tool_dependency,
+    $whoosh_index,
   ]
  file  { $paths:
     before => Class['galaxy::universe'],
     ensure => directory,
-    owner  => 'galaxy',
-    group  => 'galaxy',
+    owner  => $galaxy_user,
+    group  => $galaxy_group,
     mode   => '0755',
   }
 }
