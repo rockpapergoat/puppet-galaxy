@@ -20,7 +20,7 @@ class galaxy::directories (
     $compiled_templates,
     $file_path,
     $ftp,
-    $genetrack_plots
+    $genetrack_plots,
     $job_working,
     $object_store_cache,
     $object_store_object,
