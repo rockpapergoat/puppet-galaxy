@@ -13,12 +13,9 @@
 #
 # Copyright 2014, unless otherwise noted.
 #
-class galaxy::dependencies(){
-
-  $packages = ['mercurial', 'python', 'tar']
-
-  package { $packages:
-    ensure => installed,
-  }
-
+class galaxy::dependencies(
+  $packages = ['mercurial', 'python', 'tar'],
+  $python_virtualenv = undef,
+  ){
+  ensure_packages($packages)
 }

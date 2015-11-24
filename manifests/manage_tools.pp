@@ -1,11 +1,12 @@
+# Class: galaxy::manage_tools
+# (fill in details about params and function)
 #
 #
 #
-#
-#
-class galaxy::manage_tools {
-  $directory = $galaxy::params::app_directory
-  $cmd = "python $directory/scripts/manage_tools.py"
+class galaxy::manage_tools (
+  $directory = $galaxy::params::app_directory,
+  $cmd       = "python $directory/scripts/manage_tools.py",
+  ){
   exec { 'Manage Tools Upgrade':
     path     => '/usr/bin:/usr/sbin:/bin:/sbin',
     cwd      => $directory,

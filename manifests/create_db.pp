@@ -1,13 +1,17 @@
+# Class: galaxy::create_db
 #
 #
 #
 #
 #
-#
-class galaxy::create_db {
+class galaxy::create_db (
+  $directory    = $galaxy::params::app_directory,
+  $galaxy_user  = $galaxy::params::galaxy_user,
+  $galaxy_group = $galaxy::params::galaxy_group,
+  ) inherits galaxy::params {
+
   include ::galaxy::universe
 
-  $directory = $galaxy::params::app_directory
 
   # run create_db.sh only if the conection string changes
   file { "$directory/.db_connection":
@@ -20,8 +24,8 @@ class galaxy::create_db {
     require     => Class['galaxy::universe'],
     path        => '/usr/bin:/usr/sbin:/bin:/sbin',
     cwd         => $directory,
-    user        => 'galaxy',
-    group       => 'galaxy',
+    user        => $galaxy_user,
+    group       => $galaxy_group,
     command     => "$directory/create_db.sh",
     timeout     => 500,
     refreshonly => true,

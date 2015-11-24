@@ -30,12 +30,13 @@
 class galaxy::install(
   $install_directory = "$galaxy::params::app_directory/",
   $galaxy_branch     = $galaxy::params::galaxy_branch,
-  $galaxy_repository     = $galaxy::params::galaxy_repository,
+  $galaxy_repository = $galaxy::params::galaxy_repository,
+  $galaxy_user       = $galaxy::params::galaxy_user,
 ){
   vcsrepo { $install_directory:
     require  => Class ['galaxy'],
     ensure   => present,
-    user     => 'galaxy',
+    user     => $galaxy_user,
     source   => $galaxy_repository,
     revision => $galaxy_branch,
     provider => 'hg_galaxy',

@@ -21,9 +21,8 @@
 class galaxy::service (
   $directory = $galaxy::params::app_directory,
   $wk_config = $galaxy::universe::wk_config,
-) 
-inherits galaxy::params 
-{   
+  )
+  inherits galaxy::params {
   case $osfamily {
     Debian: { $source='galaxy/galaxy-debian-service.erb'}
     RedHat: { $source='galaxy/galaxy.fedora-init.erb'}
@@ -35,7 +34,7 @@ inherits galaxy::params
     group   => 'root',
     mode    => '0755',
     require => Class['galaxy::manage_tools']
-  }-> 
+  }->
   service { 'galaxy-service' :
     ensure    => 'running',
     enable    => true,
