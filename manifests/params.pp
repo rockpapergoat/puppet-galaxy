@@ -27,13 +27,13 @@
 # Copyright 2014, unless otherwise noted.
 #
 class galaxy::params (
-  $app_directory     = "${galaxy_homedir}/galaxy-dist",
+  $app_directory     = "${home_directory}/galaxy-dist",
   $create_user       = false,
   $directory         = undef,
   $galaxy_branch     = 'stable',
   $galaxy_group      = 'galaxy',
-  $galaxy_homedir    = undef,
   $galaxy_repository = 'https://bitbucket.org/galaxy/galaxy-dist/',
   $galaxy_user       = 'galaxy',
+  $home_directory    = undef,
 ){
 }
