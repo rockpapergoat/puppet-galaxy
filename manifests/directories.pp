@@ -2,6 +2,7 @@
 # inherits galaxy::params, where we set a number of paths needed here.
 #
 class galaxy::directories (
+  $app_dir             = $galaxy::params::app_dir,
   $cluster_files       = "${app_dir}/database/pbs",
   $compiled_templates  = "${app_dir}/database/compiled_templates",
   $file_path           = "${app_dir}/database/files",
