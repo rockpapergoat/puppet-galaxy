@@ -10,13 +10,14 @@ class galaxy::manage_tools (
   $galaxy_group = $galaxy::params::galaxy_group,
   ) inherits galaxy::params {
   exec { 'Manage Tools Upgrade':
-    path     => '/usr/bin:/usr/sbin:/bin:/sbin',
-    cwd      => $directory,
-    command  => "$cmd upgrade",
-    user     => $galaxy_user,
-    group    => $galaxy_group,
-    unless   => "test \"\$($cmd db_version)\" -eq \"\$($cmd version)\"",
-    provider => shell,
-    require  => Class['galaxy::create_db'],
+    path        => '/usr/bin:/usr/sbin:/bin:/sbin',
+    environment => ["PYTHONPATH=${directory}/lib"],
+    cwd         => $directory,
+    command     => "$cmd upgrade",
+    user        => $galaxy_user,
+    group       => $galaxy_group,
+    unless      => "test \"\$($cmd db_version)\" -eq \"\$($cmd version)\"",
+    provider    => shell,
+    require     => Class['galaxy::create_db'],
   }
 }
