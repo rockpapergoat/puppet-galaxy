@@ -38,7 +38,7 @@ class galaxy::directories (
    'file',
    $paths,
    {
-    'before' => "Class['galaxy::universe']",
+    'before' => "Class['galaxy::install']",
     'ensure' => 'directory',
     'owner'  => "$galaxy_user",
     'group'  => "$galaxy_group",
