@@ -5,7 +5,7 @@
 #
 class galaxy::manage_tools (
   $directory    = $galaxy::params::app_directory,
-  $cmd          = "python $directory/scripts/manage_tools.py",
+  $cmd          = "python ${directory}/scripts/manage_tools.py",
   $galaxy_user  = $galaxy::params::galaxy_user,
   $galaxy_group = $galaxy::params::galaxy_group,
   ) inherits galaxy::params {
