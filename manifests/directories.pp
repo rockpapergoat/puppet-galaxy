@@ -15,7 +15,7 @@ class galaxy::directories (
   $tool_dependency     = "${app_dir}/tool_dependencies",
   $whoosh_index        = "${app_dir}/database/whoosh_indexes",
   ) inherits galaxy::params {
-  $paths= [
+  $paths = [
     $cluster_files,
     $compiled_templates,
     $file_path,
