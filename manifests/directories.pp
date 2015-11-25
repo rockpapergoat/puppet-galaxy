@@ -3,7 +3,7 @@
 # uses the dirtree module here: https://github.com/AlexCline/dirtree
 #
 class galaxy::directories (
-  $app_dir             = $galaxy::params::app_dir,
+  $app_dir             = $galaxy::params::app_directory,
   $db_path             = "${app_dir}/database",
   $cluster_files       = "${db_path}/pbs",
   $compiled_templates  = "${db_path}/compiled_templates",
