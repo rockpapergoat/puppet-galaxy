@@ -5,7 +5,7 @@
 #
 #
 class galaxy::create_db (
-  $directory    = $galaxy::params::app_directory,
+  $directory    = $galaxy::params::home_directory,
   $galaxy_user  = $galaxy::params::galaxy_user,
   $galaxy_group = $galaxy::params::galaxy_group,
   ) inherits galaxy::params {
