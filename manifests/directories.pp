@@ -34,7 +34,8 @@ class galaxy::directories (
     $tool_dependency,
     $whoosh_index,
   ]
- file  { dirtree($paths):
+  $all_paths = dirtree($paths)
+ file  { $all_paths:
     before => Class['galaxy::universe'],
     ensure => directory,
     owner  => $galaxy_user,
