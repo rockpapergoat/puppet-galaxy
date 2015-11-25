@@ -15,8 +15,8 @@ class galaxy::create_db (
 
   # run create_db.sh only if the conection string changes
   file { "$directory/.db_connection":
-    owner   => 'galaxy',
-    group   => 'galaxy',
+    owner   => $galaxy_user,
+    group   => $galaxy_group,
     mode    => '0600',
     content => "$::galaxy::universe::db_connection\n",
   } ~>
