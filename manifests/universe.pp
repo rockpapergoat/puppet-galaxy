@@ -580,6 +580,10 @@ class galaxy::universe(
   # Transfer Manager
   $use_transfer_manager  = false,
   $transfer_manager_port = 10000,
+
+  # other params
+  $galaxy_user  = $galaxy::params::galaxy_user,
+  $galaxy_group = $galaxy::params::galaxy_group,
 ){
   $directory                          = $galaxy::params::app_directory
   $handler_starting_port_number       = $webworker_starting_port_number+$number_of_background_workers
@@ -602,8 +606,8 @@ class galaxy::universe(
   file { "$directory/config/galaxy.ini":
     require => Class['galaxy::install'],
     content => template("galaxy/universe_wsgi.ini.erb"),
-    owner   => 'galaxy',
-    group   => 'galaxy',
+    owner   => $galaxy_user,
+    group   => $galaxy_group,
   }
 
   # for transitional reasons
