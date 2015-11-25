@@ -16,7 +16,7 @@ class galaxy::directories (
   $tmp_file            = "${db_path}/tmp",
   $tool_data_jars      = "${app_dir}/tool-data/shared/jars",
   $tool_dependency     = "${app_dir}/tool_dependencies",
-  $whoosh_index        = "${app_dir}/database/whoosh_indexes",
+  $whoosh_index        = "${db_path}/whoosh_indexes",
   ) inherits galaxy::params {
   $paths = [
     $app_dir,
@@ -25,21 +25,24 @@ class galaxy::directories (
     $db_path,
     $file_path,
     $ftp,
-    $genetrack_plots,
+    dirtree($genetrack_plots),
     $job_working,
     $object_store_cache,
     $object_store_object,
     $tmp_file,
-    $tool_data_jars,
+    dirtree($tool_data_jars),
     $tool_dependency,
     $whoosh_index,
   ]
-  $all_paths = dirtree($paths)
- file  { $all_paths:
-    before => Class['galaxy::universe'],
-    ensure => directory,
-    owner  => $galaxy_user,
-    group  => $galaxy_group,
-    mode   => '0755',
-  }
+ ensure_resource(
+   'file',
+   $paths,
+   {
+    'before' => "Class['galaxy::universe']",
+    'ensure' => 'directory',
+    'owner'  => "$galaxy_user",
+    'group'  => "$galaxy_group",
+    'mode'   => '0755',
+   }
+ )
 }
