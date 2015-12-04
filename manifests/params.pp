@@ -35,5 +35,6 @@ class galaxy::params (
   $galaxy_repository = 'https://bitbucket.org/galaxy/galaxy-dist/',
   $galaxy_user       = 'galaxy',
   $home_directory    = undef,
+  $service_user      = 'galaxy',
 ){
 }

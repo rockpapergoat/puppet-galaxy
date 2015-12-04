@@ -11,7 +11,7 @@
 #--- config
 
 SERVICE_NAME="Galaxy"
-RUN_AS="galaxy"
+RUN_AS="<%= @service_user %>"
 RUN_IN="<%= @directory %>"
 
 #--- main actions
@@ -19,26 +19,26 @@ RUN_IN="<%= @directory %>"
 start() {
 	echo -e "Starting $SERVICE_NAME...\n"
 	 <% if @wk_config %>
-  	su - $RUN_AS -c 'GALAXY_RUN_ALL=42 <%= @directory %>/run.sh --daemon'
+	su - $RUN_AS -c 'GALAXY_RUN_ALL=42 <%= @directory %>/run.sh --daemon'
         <% else %>
         su - $RUN_AS -c '<%= @directory %>/run.sh --daemon'
-        <% end %>	
+        <% end %>
         echo "...done."
 }
 
 stop() {
 	echo -ne "Stopping $SERVICE_NAME...\n"
          <% if @wk_config %>
-  	su - $RUN_AS -c 'GALAXY_RUN_ALL=42 <%= @directory %>/run.sh --stop-daemon'
+	su - $RUN_AS -c 'GALAXY_RUN_ALL=42 <%= @directory %>/run.sh --stop-daemon'
         <% else %>
         su - $RUN_AS -c '<%= @directory %>/run.sh --stop-daemon'
-        <% end %>	
+        <% end %>
         echo "done."
 }
 
 status() {
 	echo -n "$SERVICE_NAME status: "
-	
+
 	while read pid; do
 		if [ "$(readlink -m /proc/$pid/cwd)" = "$(readlink -m $RUN_IN)" ]; then
 			echo "started"
